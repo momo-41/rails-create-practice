@@ -1,1 +1,8 @@
 <h1>新しい投稿</h1>
+
+<%= form_with model: @post do |form| %>
+<div><%= form.label :title %> <%= form.text_field :title %></div>
+<div><%= form.label :content %> <%= form.text_area :content %></div>
+<div><%= form.submit "投稿"%></div>
+<!-- 投稿を押すとcreateメソッドが呼ばれる(post_controller.rbのcreateメソッド) -->
+<% end %>
