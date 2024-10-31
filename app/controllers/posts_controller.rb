@@ -4,6 +4,22 @@ class PostsController < ApplicationController
     end
 
     def new # 新しい掲示板の投稿のフォーム用のコントローラー(new.html.erbファイルで使える)
-        @posts = Post.new # Postというtitleとcontentが含まれた情報が保存される予定
+        @post = Post.new # Postというtitleとcontentが含まれた情報が保存される予定
+    end
+
+    def create
+        @post = Post.new(post_params)
+
+        if @post.save # もし@postがデータベースに保存されたら
+            redirect_to posts_path
+        else
+            render :new
+        end
+    end
+
+    private # htmlファイルなどで呼び出せないようになっている
+
+    def post_params
+        params.require(:post).permit(:title, :content)
     end
 end
